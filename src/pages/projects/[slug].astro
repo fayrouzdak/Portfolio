@@ -1,0 +1,155 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { portfolio } from "../../data/portfolio";
+import { resolveImage } from "../../lib/images";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  return portfolio.projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+
+const showcaseImages = await Promise.all(
+  project.showcaseImages.map((path) => resolveImage(path))
+);
+---
+
+<BaseLayout
+  title={`${project.role} at ${project.company} — Fay`}
+  description={project.description[0]}
+  isDetail={true}
+>
+  <div class="detail">
+    <header class="detail__header">
+      <a href="/" class="detail__back">
+        <span class="detail__back-arrow">↩</span> Back
+      </a>
+      <span class="detail__company">
+        {project.company} / {project.period}
+      </span>
+    </header>
+
+    <section class="detail__body">
+      <div class="detail__role-label">Role overview</div>
+      <h1 class="detail__role-title">{project.role}</h1>
+
+      <div class="detail__description">
+        {project.description.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </section>
+
+    {
+      showcaseImages.length > 0 && (
+        <div class="detail__showcase">
+          {showcaseImages.map((img, i) => (
+            <div class="detail__showcase-item">
+              <Image
+                src={img}
+                alt={`${project.company} project screenshot ${i + 1}`}
+                widths={[550, 1100]}
+                sizes="(max-width: 640px) calc(100vw - 40px), 550px"
+                class="detail__showcase-image"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ─── Header ─────────────────────────────── */
+  .detail__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .detail__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--color-text);
+    transition: color 0.15s ease;
+  }
+
+  .detail__back:hover {
+    color: var(--color-text-secondary);
+  }
+
+  .detail__back-arrow {
+    font-size: 12px;
+  }
+
+  .detail__company {
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+
+  /* ─── Body ───────────────────────────────── */
+  .detail__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .detail__role-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 2px;
+  }
+
+  .detail__role-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-bottom: 16px;
+  }
+
+  .detail__description {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .detail__description p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  /* ─── Showcase ───────────────────────────── */
+  .detail__showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .detail__showcase-item {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .detail__showcase-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

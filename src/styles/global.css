@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap");
+
+/* ─── Reset ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Custom properties ─────────────────────────────────── */
+:root {
+  --content-max-width: 550px;
+  --padding-x: 20px;
+  --padding-y: 40px;
+
+  --color-text: #656565;
+  --color-text-secondary: #000000;
+  --color-text-tertiary: #949494;
+  --color-text-muted: var(--color-text-tertiary);
+  --color-link: var(--color-text);
+  --color-bg: #ffffff;
+
+  --font-size-base: 13px;
+  --line-height-base: 1.55;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+html {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ─── Page layout ────────────────────────────────────────── */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--padding-y) var(--padding-x);
+}
+
+.page-content {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* Detail page needs extra bottom breathing room */
+.page-content--detail {
+  padding-bottom: 80px;
+}
+
+@media (min-width: 640px) {
+  .page-content--detail {
+    padding-bottom: 140px;
+  }
+}

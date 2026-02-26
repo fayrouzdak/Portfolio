@@ -1,0 +1,86 @@
+---
+import { Image } from "astro:assets";
+import { resolveImage } from "../lib/images";
+import type { Project } from "../data/types";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const thumbnailImage = await resolveImage(project.thumbnail);
+---
+
+<a href={`/projects/${project.slug}`} class="card">
+  <div class="card__meta">
+    <span class="card__icon">{project.icon}</span>
+    <p class="card__title">{project.title}</p>
+    <p class="card__subtitle">
+      at {project.company}
+      {" /"} {project.period}
+    </p>
+  </div>
+
+  <div class="card__image-wrap">
+    <Image
+      src={thumbnailImage}
+      alt={`${project.company} project thumbnail`}
+      widths={[280, 560]}
+      sizes="(max-width: 640px) 90vw, 180px"
+      class="card__image"
+    />
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .card__icon {
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 4px;
+    /* Render as a muted gray icon-like element */
+    filter: grayscale(1) opacity(0.45);
+  }
+
+  .card__title {
+    font-size: 13px;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .card__subtitle {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+
+  .card__image-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: #f5f5f5;
+  }
+
+  .card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-md);
+    transition: opacity 0.15s ease;
+  }
+
+  .card:hover .card__image {
+    opacity: 0.9;
+  }
+</style>

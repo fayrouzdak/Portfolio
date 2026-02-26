@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Bio from "../components/Bio.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { portfolio } from "../data/portfolio";
+---
+
+<BaseLayout>
+  <div class="home">
+    <Bio
+      name={portfolio.name}
+      bio={portfolio.bio}
+      avatar={portfolio.avatar}
+      socialLinks={portfolio.socialLinks}
+    />
+
+    <div class="projects">
+      {portfolio.projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .projects {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

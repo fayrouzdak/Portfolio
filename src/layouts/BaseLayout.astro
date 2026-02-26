@@ -1,0 +1,35 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** When true, applies the extra bottom padding for detail pages */
+  isDetail?: boolean;
+}
+
+const {
+  title = "Fay — Product Designer",
+  description = "Senior product designer working on cloud software, SaaS, and marketplaces.",
+  isDetail = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <main class:list={["page-content", { "page-content--detail": isDetail }]}>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
