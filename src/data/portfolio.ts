@@ -71,7 +71,16 @@ export const portfolio: PortfolioData = {
         "projects/smb/smb-2.png",
         "projects/smb/smb-3.png",
       ],
-      showcaseImages: ["projects/smb/showcase-1.png"],
+      showcaseImages: [
+        "projects/smb/smb-showcase-2.png",
+        "projects/smb/smb-showcase-3.png",
+        "projects/smb/smb-showcase-1.png",
+        "projects/smb/smb-showcase-4.png",
+        "projects/smb/smb-showcase-8.png",
+        "projects/smb/smb-showcase-7.png",
+        "projects/smb/smb-showcase-6.png",
+        "projects/smb/smb-showcase-5.png",
+      ],
     },
     {
       slug: "agencies",
