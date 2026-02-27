@@ -159,4 +159,10 @@ const thumbnailImages = await Promise.all(
   .card:hover .card__image:nth-child(3) {
     transform: translateX(100px) rotate(0deg);
   }
+
+  @media (max-width: 640px) {
+    .card {
+      width: 100%;
+    }
+  }
 </style>

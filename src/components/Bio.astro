@@ -126,4 +126,28 @@ const avatarImage = await resolveImage(avatar);
     color: var(--color-text-secondary);
     border-bottom-color: #c5c5c5;
   }
+
+  @media (max-width: 640px) {
+    .bio {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .bio__left {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .bio__links {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      align-self: flex-start;
+      gap: 8px 12px;
+    }
+  }
 </style>

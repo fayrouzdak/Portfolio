@@ -77,16 +77,9 @@ a:hover {
 
 /* ─── Detail page layout ─────────────────────────────────── */
 
-/*
- * Align the detail page top with wherever the main page content
- * lands after vertical centering. --computed-main-top is written
- * by an inline script in <head> that reads the value stored in
- * localStorage by the main page; falls back to --padding-y when
- * no stored value exists (first visit, direct link, etc.).
- */
 .page-wrapper--detail {
   justify-content: flex-start;
-  padding-top: var(--computed-main-top, var(--padding-y));
+  padding-top: var(--computed-main-top);
 }
 
 .page-wrapper--detail > .page-content {

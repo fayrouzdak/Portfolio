@@ -80,8 +80,9 @@ const showcaseImages = await Promise.all(
   /* ─── Header ─────────────────────────────── */
   .detail__header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 24px;
     margin-bottom: 20px;
   }
 
@@ -107,8 +108,10 @@ const showcaseImages = await Promise.all(
   }
 
   .detail__company {
+    margin-left: auto;
     font-size: 13px;
     color: #949494;
+    text-align: right;
   }
 
   /* ─── Body ───────────────────────────────── */
