@@ -10,6 +10,17 @@
     "binding": "ASSETS",
     "directory": "dist"
   },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "faydakrouri.com/*",
+      "zone_name": "faydakrouri.com"
+    },
+    {
+      "pattern": "www.faydakrouri.com/*",
+      "zone_name": "faydakrouri.com"
+    }
+  ],
   "observability": {
     "enabled": true
   },
