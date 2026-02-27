@@ -13,7 +13,9 @@ const {
   description = "Senior product designer working on cloud software, SaaS, and marketplaces.",
   isDetail = false,
 } = Astro.props;
-const socialImageUrl = new URL("/preview-link.png", Astro.site ?? Astro.url).toString();
+const socialImageUrl = Astro.site
+  ? new URL("/preview-link.png", Astro.site).toString()
+  : "/preview-link.png";
 ---
 
 <!doctype html>
