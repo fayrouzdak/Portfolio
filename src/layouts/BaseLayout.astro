@@ -24,12 +24,46 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {isDetail && (
+      <!-- Runs before first paint so there is no layout shift -->
+      <script is:inline>
+        (function () {
+          var stored = localStorage.getItem('main-content-top');
+          if (stored) {
+            document.documentElement.style.setProperty('--computed-main-top', stored + 'px');
+          }
+        })();
+      </script>
+    )}
   </head>
   <body>
-    <div class="page-wrapper">
+    <div class:list={["page-wrapper", { "page-wrapper--detail": isDetail }]}>
       <main class:list={["page-content", { "page-content--detail": isDetail }]}>
         <slot />
       </main>
     </div>
+    {!isDetail && (
+      <!-- Measures and caches the actual visual top of the content so the
+           detail page can align its top edge to the same position. -->
+      <script is:inline>
+        (function () {
+          function saveMainTop() {
+            var content = document.querySelector('.page-content');
+            if (content) {
+              localStorage.setItem(
+                'main-content-top',
+                Math.round(content.getBoundingClientRect().top)
+              );
+            }
+          }
+          if (document.readyState === 'complete') {
+            saveMainTop();
+          } else {
+            window.addEventListener('load', saveMainTop);
+          }
+          window.addEventListener('resize', saveMainTop);
+        })();
+      </script>
+    )}
   </body>
 </html>

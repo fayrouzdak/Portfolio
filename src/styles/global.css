@@ -23,7 +23,6 @@
   --color-bg: #ffffff;
 
   --font-size-base: 13px;
-  --line-height-base: 1.55;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -34,7 +33,6 @@ html {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: var(--font-size-base);
   font-weight: 400;
-  line-height: var(--line-height-base);
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -77,13 +75,28 @@ a:hover {
   margin-bottom: auto;
 }
 
-/* Detail page needs extra bottom breathing room */
-.page-content--detail {
+/* ─── Detail page layout ─────────────────────────────────── */
+
+/*
+ * Align the detail page top with wherever the main page content
+ * lands after vertical centering. --computed-main-top is written
+ * by an inline script in <head> that reads the value stored in
+ * localStorage by the main page; falls back to --padding-y when
+ * no stored value exists (first visit, direct link, etc.).
+ */
+.page-wrapper--detail {
+  justify-content: flex-start;
+  padding-top: var(--computed-main-top, var(--padding-y));
+}
+
+.page-wrapper--detail > .page-content {
+  margin-top: 0;
+  margin-bottom: 0;
   padding-bottom: 80px;
 }
 
 @media (min-width: 640px) {
-  .page-content--detail {
+  .page-wrapper--detail > .page-content {
     padding-bottom: 140px;
   }
 }

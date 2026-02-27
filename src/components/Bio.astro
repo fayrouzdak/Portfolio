@@ -16,13 +16,16 @@ const avatarImage = await resolveImage(avatar);
 
 <div class="bio">
   <div class="bio__left">
-    <Image
-      src={avatarImage}
-      alt={name}
-      width={28}
-      height={28}
-      class="bio__avatar"
-    />
+    <div class="bio__avatar-wrap">
+      <Image
+        src={avatarImage}
+        alt={name}
+        widths={[120, 240, 360]}
+        sizes="30px"
+        quality={95}
+        class="bio__avatar"
+      />
+    </div>
     <p class="bio__text">
       <span class="bio__name">Hi, I'm {name}.</span>
       {" "}{bio}
@@ -31,64 +34,96 @@ const avatarImage = await resolveImage(avatar);
 
   <nav class="bio__links">
     {
-      socialLinks.map((link) => (
-        <a href={link.url} class="bio__link" target="_blank" rel="noopener noreferrer">
-          {link.label}
-        </a>
-      ))
+      socialLinks.map((link) => {
+        const isMailto = link.url.startsWith("mailto:");
+        return (
+          <a
+            href={link.url}
+            class="bio__link"
+            target={isMailto ? undefined : "_blank"}
+            rel={isMailto ? undefined : "noopener noreferrer"}
+          >
+            {link.label}
+          </a>
+        );
+      })
     }
   </nav>
 </div>
 
-<style>
+<style is:global>
   .bio {
     display: flex;
     align-items: flex-start;
-    gap: 24px;
+    gap: 20px;
   }
 
   .bio__left {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 20px;
     flex: 1;
   }
 
+  .bio__avatar-wrap {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .bio__avatar-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+
   .bio__avatar {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
     flex-shrink: 0;
     object-fit: cover;
-    margin-top: 1px;
   }
 
   .bio__text {
     font-size: 13px;
-    line-height: 1.55;
     color: var(--color-text);
   }
 
   .bio__name {
     font-weight: 400;
+    color: var(--color-text-secondary);
   }
 
   .bio__links {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: flex-end;
+    align-self: stretch;
     gap: 2px;
     flex-shrink: 0;
   }
 
   .bio__link {
+    display: inline-block;
     font-size: 13px;
-    line-height: 1.55;
     color: var(--color-text);
     white-space: nowrap;
+    border-bottom: 1px dashed transparent;
   }
 
-  .bio__link:hover {
+  .bio__link:visited {
+    color: var(--color-text);
+  }
+
+  .bio__link:hover,
+  .bio__link:active {
     color: var(--color-text-secondary);
+    border-bottom-color: #c5c5c5;
   }
 </style>

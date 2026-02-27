@@ -9,14 +9,20 @@ src/assets/
 ├── avatar.jpg                         ← your profile photo
 └── projects/
     ├── laravel/
-    │   ├── thumbnail.png              ← card thumbnail on main page
+    │   ├── laravel-1.png              ← card thumbnails on main page
+    │   ├── laravel-2.png
+    │   ├── laravel-3.png
     │   ├── showcase-1.png             ← detail page screenshots
     │   └── showcase-2.png
     ├── smb/
-    │   ├── thumbnail.png
+    │   ├── smb-1.png
+    │   ├── smb-2.png
+    │   ├── smb-3.png
     │   └── showcase-1.png
     └── agencies/
-        ├── thumbnail.png
+        ├── agencies-1.png
+        ├── agencies-2.png
+        ├── agencies-3.png
         └── showcase-1.png
 ```
 

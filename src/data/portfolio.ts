@@ -3,16 +3,29 @@ import type { PortfolioData } from "./types";
 export const portfolio: PortfolioData = {
   name: "fay",
   bio: "I think good design is sharp, both in how it looks and works. I like to think through experiences and put effort into shipping solutions with taste. I'm currently experienced in cloud software, data heavy developer workflows, saas, and marketplaces.",
-  avatar: "avatar.jpg",
+  avatar: "avatar.png",
   socialLinks: [
-    { label: "Twitter", url: "https://twitter.com/" },
-    { label: "Linkedin", url: "https://linkedin.com/" },
-    { label: "Email", url: "mailto:hello@example.com" },
+    { label: "Twitter", url: "https://x.com/faydesignsstuff" },
+    { label: "Linkedin", url: "https://www.linkedin.com/in/fayrouzdak/" },
+    { label: "Email", url: "mailto:faydakrouri@gmail.com" },
   ],
   projects: [
     {
       slug: "laravel",
-      icon: "🐦",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+  <g clip-path="url(#clip0_project_card_1)">
+    <path d="M12.3636 2.06799L9.45455 4.13582V7.58219L6.54545 8.96074V2.06799L3.34545 0.275879L0 2.06799V12.4071L6.54545 16.5428L12.3636 13.0964V8.96073L16 7.58219V4.13582L12.3636 2.06799Z" fill="#DBDBDB"/>
+    <mask id="path-2-inside-1_project_card_1" fill="white">
+      <path d="M15.9625 3.77453C15.9685 3.79645 15.9715 3.81905 15.9715 3.84176V7.37098C15.9715 7.41627 15.9596 7.46077 15.9369 7.49996C15.9142 7.53916 15.8815 7.57167 15.8422 7.5942L12.8801 9.29963V12.6799C12.8801 12.7719 12.8312 12.8568 12.7514 12.9032L6.56823 16.4626C6.55408 16.4706 6.53864 16.4758 6.5232 16.4813C6.51741 16.4832 6.51194 16.4867 6.50583 16.4883C6.46261 16.4997 6.41717 16.4997 6.37395 16.4883C6.36688 16.4864 6.36044 16.4825 6.35369 16.48C6.33953 16.4748 6.32474 16.4703 6.31123 16.4626L0.129306 12.9032C0.0900341 12.8806 0.0574031 12.8481 0.0347018 12.8089C0.0120005 12.7697 3.11169e-05 12.7252 0 12.6799L0 2.09226C0 2.06911 0.00321657 2.04659 0.00900639 2.02472C0.0109363 2.01732 0.0154395 2.01056 0.0180128 2.00317C0.0228376 1.98966 0.0273408 1.97582 0.0344173 1.96328C0.0392421 1.95492 0.0463186 1.94816 0.0521084 1.94044C0.0595065 1.93015 0.0662613 1.91954 0.074946 1.91053C0.0823441 1.90313 0.0919939 1.89766 0.100357 1.89123C0.109685 1.88351 0.118048 1.87515 0.128663 1.86903L3.22011 0.0893075C3.25925 0.0667853 3.30361 0.0549316 3.34877 0.0549316C3.39393 0.0549316 3.43829 0.0667853 3.47743 0.0893075L6.56855 1.86903H6.5692C6.57949 1.87547 6.58817 1.88351 6.5975 1.89091C6.60587 1.89734 6.61519 1.90313 6.62259 1.91021C6.6316 1.91954 6.63803 1.93015 6.64575 1.94044C6.65122 1.94816 6.65862 1.95492 6.66312 1.96328C6.67052 1.97615 6.6747 1.98966 6.67985 2.00317C6.68242 2.01056 6.68692 2.01732 6.68885 2.02504C6.69478 2.04696 6.6978 2.06956 6.69786 2.09226V8.70521L9.27369 7.22205V3.84143C9.27369 3.81892 9.2769 3.79608 9.28269 3.77453C9.28495 3.76681 9.28913 3.76006 9.2917 3.75266C9.29685 3.73915 9.30135 3.72532 9.30843 3.71277C9.31325 3.70441 9.32033 3.69765 9.3258 3.68993C9.33352 3.67964 9.33995 3.66903 9.34896 3.66002C9.35635 3.65262 9.36568 3.64715 9.37404 3.64072C9.38369 3.633 9.39206 3.62464 9.40235 3.61853L12.4941 1.8388C12.5332 1.81625 12.5776 1.80437 12.6228 1.80437C12.6679 1.80437 12.7123 1.81625 12.7514 1.8388L15.8426 3.61853C15.8535 3.62496 15.8619 3.633 15.8715 3.6404C15.8796 3.64683 15.8889 3.65262 15.8963 3.6597C15.9053 3.66903 15.9117 3.67964 15.9194 3.68993C15.9252 3.69765 15.9323 3.70441 15.9368 3.71277C15.9442 3.72532 15.9484 3.73915 15.9535 3.75266C15.9564 3.76006 15.9606 3.76681 15.9625 3.77453ZM15.4563 7.22205V4.28725L14.3745 4.90998L12.8801 5.77041V8.70521L15.4566 7.22205H15.4563ZM12.3651 12.531V9.59427L10.8952 10.4338L6.69754 12.8295V15.7939L12.3651 12.531ZM0.515294 2.53776V12.531L6.18224 15.7936V12.8298L3.22171 11.1543L3.22075 11.1537L3.21946 11.153C3.20949 11.1472 3.20113 11.1389 3.1918 11.1318C3.18376 11.1254 3.17443 11.1202 3.16735 11.1131L3.16671 11.1122C3.15835 11.1041 3.15256 11.0942 3.14548 11.0851C3.13905 11.0765 3.13133 11.0691 3.12618 11.0601L3.12586 11.0591C3.12007 11.0494 3.11653 11.0379 3.11235 11.0269C3.10817 11.0173 3.1027 11.0083 3.10013 10.998C3.09691 10.9858 3.09627 10.9726 3.09498 10.96C3.0937 10.9504 3.09112 10.9407 3.09112 10.9311V4.02092L1.59703 3.16017L0.515294 2.53776ZM3.34909 0.609748L0.773585 2.09226L3.34845 3.57478L5.92363 2.09194L3.34845 0.609748H3.34909ZM4.68847 9.86189L6.18257 9.00178V2.53776L5.10083 3.16049L3.60642 4.02092V10.4849L4.68847 9.86189ZM12.6228 2.35924L10.0476 3.84176L12.6228 5.32427L15.1976 3.84143L12.6228 2.35924ZM12.3651 5.77041L10.8707 4.90998L9.78898 4.28725V7.22205L11.2831 8.08216L12.3651 8.70521V5.77041ZM6.43957 12.384L10.2168 10.2276L12.1049 9.15006L9.53166 7.66851L6.56888 9.37425L3.86857 10.9288L6.43957 12.384Z"/>
+    </mask>
+    <path d="M15.9625 3.77453C15.9685 3.79645 15.9715 3.81905 15.9715 3.84176V7.37098C15.9715 7.41627 15.9596 7.46077 15.9369 7.49996C15.9142 7.53916 15.8815 7.57167 15.8422 7.5942L12.8801 9.29963V12.6799C12.8801 12.7719 12.8312 12.8568 12.7514 12.9032L6.56823 16.4626C6.55408 16.4706 6.53864 16.4758 6.5232 16.4813C6.51741 16.4832 6.51194 16.4867 6.50583 16.4883C6.46261 16.4997 6.41717 16.4997 6.37395 16.4883C6.36688 16.4864 6.36044 16.4825 6.35369 16.48C6.33953 16.4748 6.32474 16.4703 6.31123 16.4626L0.129306 12.9032C0.0900341 12.8806 0.0574031 12.8481 0.0347018 12.8089C0.0120005 12.7697 3.11169e-05 12.7252 0 12.6799L0 2.09226C0 2.06911 0.00321657 2.04659 0.00900639 2.02472C0.0109363 2.01732 0.0154395 2.01056 0.0180128 2.00317C0.0228376 1.98966 0.0273408 1.97582 0.0344173 1.96328C0.0392421 1.95492 0.0463186 1.94816 0.0521084 1.94044C0.0595065 1.93015 0.0662613 1.91954 0.074946 1.91053C0.0823441 1.90313 0.0919939 1.89766 0.100357 1.89123C0.109685 1.88351 0.118048 1.87515 0.128663 1.86903L3.22011 0.0893075C3.25925 0.0667853 3.30361 0.0549316 3.34877 0.0549316C3.39393 0.0549316 3.43829 0.0667853 3.47743 0.0893075L6.56855 1.86903H6.5692C6.57949 1.87547 6.58817 1.88351 6.5975 1.89091C6.60587 1.89734 6.61519 1.90313 6.62259 1.91021C6.6316 1.91954 6.63803 1.93015 6.64575 1.94044C6.65122 1.94816 6.65862 1.95492 6.66312 1.96328C6.67052 1.97615 6.6747 1.98966 6.67985 2.00317C6.68242 2.01056 6.68692 2.01732 6.68885 2.02504C6.69478 2.04696 6.6978 2.06956 6.69786 2.09226V8.70521L9.27369 7.22205V3.84143C9.27369 3.81892 9.2769 3.79608 9.28269 3.77453C9.28495 3.76681 9.28913 3.76006 9.2917 3.75266C9.29685 3.73915 9.30135 3.72532 9.30843 3.71277C9.31325 3.70441 9.32033 3.69765 9.3258 3.68993C9.33352 3.67964 9.33995 3.66903 9.34896 3.66002C9.35635 3.65262 9.36568 3.64715 9.37404 3.64072C9.38369 3.633 9.39206 3.62464 9.40235 3.61853L12.4941 1.8388C12.5332 1.81625 12.5776 1.80437 12.6228 1.80437C12.6679 1.80437 12.7123 1.81625 12.7514 1.8388L15.8426 3.61853C15.8535 3.62496 15.8619 3.633 15.8715 3.6404C15.8796 3.64683 15.8889 3.65262 15.8963 3.6597C15.9053 3.66903 15.9117 3.67964 15.9194 3.68993C15.9252 3.69765 15.9323 3.70441 15.9368 3.71277C15.9442 3.72532 15.9484 3.73915 15.9535 3.75266C15.9564 3.76006 15.9606 3.76681 15.9625 3.77453ZM15.4563 7.22205V4.28725L14.3745 4.90998L12.8801 5.77041V8.70521L15.4566 7.22205H15.4563ZM12.3651 12.531V9.59427L10.8952 10.4338L6.69754 12.8295V15.7939L12.3651 12.531ZM0.515294 2.53776V12.531L6.18224 15.7936V12.8298L3.22171 11.1543L3.22075 11.1537L3.21946 11.153C3.20949 11.1472 3.20113 11.1389 3.1918 11.1318C3.18376 11.1254 3.17443 11.1202 3.16735 11.1131L3.16671 11.1122C3.15835 11.1041 3.15256 11.0942 3.14548 11.0851C3.13905 11.0765 3.13133 11.0691 3.12618 11.0601L3.12586 11.0591C3.12007 11.0494 3.11653 11.0379 3.11235 11.0269C3.10817 11.0173 3.1027 11.0083 3.10013 10.998C3.09691 10.9858 3.09627 10.9726 3.09498 10.96C3.0937 10.9504 3.09112 10.9407 3.09112 10.9311V4.02092L1.59703 3.16017L0.515294 2.53776ZM3.34909 0.609748L0.773585 2.09226L3.34845 3.57478L5.92363 2.09194L3.34845 0.609748H3.34909ZM4.68847 9.86189L6.18257 9.00178V2.53776L5.10083 3.16049L3.60642 4.02092V10.4849L4.68847 9.86189ZM12.6228 2.35924L10.0476 3.84176L12.6228 5.32427L15.1976 3.84143L12.6228 2.35924ZM12.3651 5.77041L10.8707 4.90998L9.78898 4.28725V7.22205L11.2831 8.08216L12.3651 8.70521V5.77041ZM6.43957 12.384L10.2168 10.2276L12.1049 9.15006L9.53166 7.66851L6.56888 9.37425L3.86857 10.9288L6.43957 12.384Z" stroke="#C5C5C5" stroke-width="2.16629" mask="url(#path-2-inside-1_project_card_1)"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_project_card_1">
+      <rect width="16" height="16.5426" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>`,
       title: "Senior product designer",
       company: "Laravel",
       period: "Current",
@@ -24,7 +37,11 @@ export const portfolio: PortfolioData = {
         "If I'm actually doing my job right, people should never have to think about how much infra anxiety was quietly removed along the way.",
         "I'm very intentional about details and taste. In a product like Cloud, small decisions honestly compound so fast, so I'm careful about hierarchy, copy, defaults, and edge cases. I care a lot about quality. So for me, it's really important to know when to add guidance, when to step back, and when doing less is actually the better design choice.",
       ],
-      thumbnail: "projects/laravel/thumbnail.png",
+      thumbnails: [
+        "projects/laravel/laravel-1.png",
+        "projects/laravel/laravel-2.png",
+        "projects/laravel/laravel-3.png",
+      ],
       showcaseImages: [
         "projects/laravel/showcase-1.png",
         "projects/laravel/showcase-2.png",
@@ -32,32 +49,50 @@ export const portfolio: PortfolioData = {
     },
     {
       slug: "smb",
-      icon: "💬",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
+  <path d="M8.21985 3.75098L0.313599 5.60449V4.13379C0.313828 3.03418 1.09527 2.06469 2.22278 1.80078L8.21985 0.394531V3.75098Z" fill="#DBDBDB" stroke="#C5C5C5" stroke-width="0.626573"/>
+  <path d="M8.21979 8.24805V11.6045L2.22272 10.1992C1.09511 9.9352 0.313596 8.96593 0.313538 7.86621V6.39453L8.21979 8.24805Z" fill="#DBDBDB" stroke="#C5C5C5" stroke-width="0.626573"/>
+  <path d="M16.7556 11.8657C16.7555 12.9653 15.9738 13.9347 14.8464 14.1987H14.8454L8.8493 15.604V12.2466L16.7556 10.394V11.8657Z" fill="#DBDBDB" stroke="#C5C5C5" stroke-width="0.626573"/>
+  <path d="M14.8454 5.7998H14.8464C15.9738 6.06385 16.7556 7.03409 16.7556 8.13379V9.60352L8.8493 7.75098V4.39355L14.8454 5.7998Z" fill="#DBDBDB" stroke="#C5C5C5" stroke-width="0.626573"/>
+</svg>`,
       title: "Product designer",
       company: "SMB.co",
       period: "2024",
       isCurrent: false,
       role: "Product designer",
       description: [
-        "Worked as the sole designer at SMB.co, responsible for the end-to-end product experience across the platform.",
-        "Collaborated closely with engineering and leadership to define features, create flows, and ship a product customers loved.",
+        "My job was to design an experience for people navigating high stakes and emotional decisions. The product serves very different audiences, individual buyers, institutional investors, brokers, and owners. Sometimes that meant plain simplicity and other times it meant depth.",
+        "I worked on a small team of five as the sole designer, which gave me a lot of autonomy and responsibility. I worked closely with engineering and leadership to define structure early, especially where the problem wasn't \"how should this look?\" but \"what should this even be?\" (was a very common question, and usually the start of the best conversations)",
+        "If I'm actually doing my job right, the experience would guide people toward better decisions instead of overwhelming them with options. A lot of the work was about shaping how people think about what they're looking for.",
+        "I'm naturally a careful designer but this experience has taught me that when money and trust are involved, every interaction needs to be deliberate. I needed to focus on clarity, pacing, and restraint to make sure every flow is human and not salesy (even if it actually were)",
       ],
-      thumbnail: "projects/smb/thumbnail.png",
+      thumbnails: [
+        "projects/smb/smb-1.png",
+        "projects/smb/smb-2.png",
+        "projects/smb/smb-3.png",
+      ],
       showcaseImages: ["projects/smb/showcase-1.png"],
     },
     {
       slug: "agencies",
-      icon: "⚙️",
+      svg: `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+  <path d="M6.66699 0.25C10.2106 0.250176 13.083 3.12327 13.083 6.66699C13.0828 10.2105 10.2105 13.0828 6.66699 13.083C3.12327 13.083 0.250176 10.2106 0.25 6.66699C0.25 3.12316 3.12316 0.25 6.66699 0.25ZM6.66699 3.08887C6.25279 3.08887 5.91699 3.42465 5.91699 3.83887V5.91699H3.83789C3.42386 5.91718 3.08789 6.25282 3.08789 6.66699C3.08789 7.08108 3.42384 7.4168 3.83789 7.41699H5.91699V9.49512C5.91699 9.90932 6.25279 10.2451 6.66699 10.2451C7.08105 10.2449 7.41699 9.90921 7.41699 9.49512V7.41699H9.49512C9.90939 7.41696 10.2451 7.08116 10.2451 6.66699C10.2451 6.25274 9.90936 5.91702 9.49512 5.91699H7.41699V3.83887C7.41699 3.42476 7.08104 3.08904 6.66699 3.08887Z" fill="#DBDBDB" stroke="#C5C5C5" stroke-width="0.5"/>
+</svg>`,
       title: "Product designer",
       company: "projects + agencies",
-      period: "2020 – 2023",
+      companyFull: "various freelance projects and agency work",
+      period: "2020 - 2023",
       isCurrent: false,
       role: "Product designer",
       description: [
         "Worked across a variety of client projects and agencies, covering branding, product design, and UX across SaaS and marketplace products.",
         "Gained experience working in different team environments, adapting to varying constraints and delivering polished outcomes.",
       ],
-      thumbnail: "projects/agencies/thumbnail.png",
+      thumbnails: [
+        "projects/agencies/agencies-1.png",
+        "projects/agencies/agencies-2.png",
+        "projects/agencies/agencies-3.png",
+      ],
       showcaseImages: ["projects/agencies/showcase-1.png"],
     },
   ],
