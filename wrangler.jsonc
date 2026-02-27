@@ -13,12 +13,12 @@
   "workers_dev": false,
   "routes": [
     {
-      "pattern": "faydakrouri.com/*",
-      "zone_name": "faydakrouri.com"
+      "pattern": "faydakrouri.com",
+      "custom_domain": true
     },
     {
-      "pattern": "www.faydakrouri.com/*",
-      "zone_name": "faydakrouri.com"
+      "pattern": "www.faydakrouri.com",
+      "custom_domain": true
     }
   ],
   "observability": {
