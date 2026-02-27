@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import avatarImage from "../assets/avatar.png";
 
 interface Props {
   title?: string;
@@ -13,6 +14,7 @@ const {
   description = "Senior product designer working on cloud software, SaaS, and marketplaces.",
   isDetail = false,
 } = Astro.props;
+const socialImageUrl = new URL("/preview-link.png", Astro.site ?? Astro.url).toString();
 ---
 
 <!doctype html>
@@ -22,8 +24,16 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href={avatarImage.src} />
     {isDetail && (
       <script is:inline>
         (function () {

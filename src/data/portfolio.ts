@@ -102,7 +102,15 @@ export const portfolio: PortfolioData = {
         "projects/agencies/agencies-2.png",
         "projects/agencies/agencies-3.png",
       ],
-      showcaseImages: ["projects/agencies/showcase-1.png"],
+      showcaseImages: [
+        "projects/agencies/agencies-showcase-8.png",
+        "projects/agencies/agencies-showcase-7.png",
+        "projects/agencies/agencies-showcase-5.png",
+        "projects/agencies/agencies-showcase-6.png",
+        "projects/agencies/agencies-showcase-4.png",
+        "projects/agencies/agencies-showcase-2.png",
+        "projects/agencies/agencies-showcase-1.png",
+      ],
     },
   ],
 };
