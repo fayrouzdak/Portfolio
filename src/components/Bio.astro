@@ -20,8 +20,8 @@ const avatarImage = await resolveImage(avatar);
       <Image
         src={avatarImage}
         alt={name}
-        widths={[120, 240, 360]}
-        sizes="30px"
+        widths={[128, 256, 384]}
+        sizes="32px"
         quality={95}
         class="bio__avatar"
       />
@@ -55,20 +55,20 @@ const avatarImage = await resolveImage(avatar);
   .bio {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 22px;
   }
 
   .bio__left {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
+    gap: 22px;
     flex: 1;
   }
 
   .bio__avatar-wrap {
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     flex-shrink: 0;
   }
 
@@ -82,15 +82,15 @@ const avatarImage = await resolveImage(avatar);
   }
 
   .bio__avatar {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 4px;
     flex-shrink: 0;
     object-fit: cover;
   }
 
   .bio__text {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--color-text);
   }
 
@@ -111,7 +111,7 @@ const avatarImage = await resolveImage(avatar);
 
   .bio__link {
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--color-text);
     white-space: nowrap;
     border-bottom: 1px dashed transparent;
@@ -131,14 +131,14 @@ const avatarImage = await resolveImage(avatar);
     .bio {
       flex-direction: column;
       align-items: flex-start;
-      gap: 12px;
+      gap: 13px;
     }
 
     .bio__left {
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
-      gap: 12px;
+      gap: 13px;
     }
 
     .bio__links {
@@ -147,7 +147,7 @@ const avatarImage = await resolveImage(avatar);
       align-items: flex-start;
       justify-content: flex-start;
       align-self: flex-start;
-      gap: 8px 12px;
+      gap: 9px 13px;
     }
   }
 </style>

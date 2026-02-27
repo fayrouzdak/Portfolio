@@ -38,8 +38,8 @@ const socialImageUrl = Astro.site
     {isDetail && (
       <script is:inline>
         (function () {
-          var DEFAULT_HEIGHT = 284;
-          var padY = 40;
+          var DEFAULT_HEIGHT = 306;
+          var padY = 43;
           var h = parseFloat(localStorage.getItem('main-content-height')) || DEFAULT_HEIGHT;
           var top = Math.max(padY, (window.innerHeight - h) / 2);
           document.documentElement.style.setProperty('--computed-main-top', Math.round(top) + 'px');

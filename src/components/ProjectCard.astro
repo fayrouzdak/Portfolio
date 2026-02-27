@@ -35,8 +35,8 @@ const thumbnailImages = await Promise.all(
       <Image
         src={img}
         alt={`${project.slug} thumbnail ${i + 1}`}
-        widths={[420, 560, 700]}
-        sizes="70px"
+      widths={[450, 600, 750]}
+      sizes="75px"
         quality={100}
         class="card__image"
       />
@@ -48,12 +48,12 @@ const thumbnailImages = await Promise.all(
   .card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 11px;
     cursor: pointer;
-    width: 186px;
-    height: 182px;
+    width: 200px;
+    height: 196px;
     box-sizing: border-box;
-    padding: 8px;
+    padding: 9px;
     border-radius: 6px;
     transition: background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -65,8 +65,8 @@ const thumbnailImages = await Promise.all(
   }
 
   .card__icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,12 +78,12 @@ const thumbnailImages = await Promise.all(
   }
 
   .card__title {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--color-text);
   }
 
   .card__subtitle {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--color-text-muted);
   }
 
@@ -91,7 +91,7 @@ const thumbnailImages = await Promise.all(
     align-self: end;
     position: relative;
     width: 100%;
-    height: 94px;
+    height: 101px;
     margin-top: auto;
     margin-right: auto;
     margin-left: 0;
@@ -101,8 +101,8 @@ const thumbnailImages = await Promise.all(
     display: flex;
     position: absolute;
     bottom: 0;
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
@@ -139,13 +139,13 @@ const thumbnailImages = await Promise.all(
   .card__image:nth-child(2) {
     left: 0;
     z-index: 2;
-    transform: translateX(40px) rotate(0deg);
+    transform: translateX(43px) rotate(0deg);
   }
 
   .card__image:nth-child(3) {
     left: 0;
     z-index: 3;
-    transform: translateX(80px) rotate(3deg);
+    transform: translateX(86px) rotate(3deg);
   }
 
   .card:hover .card__image:nth-child(1) {
@@ -153,11 +153,11 @@ const thumbnailImages = await Promise.all(
   }
 
   .card:hover .card__image:nth-child(2) {
-    transform: translateX(50px) rotate(0deg);
+    transform: translateX(54px) rotate(0deg);
   }
 
   .card:hover .card__image:nth-child(3) {
-    transform: translateX(100px) rotate(0deg);
+    transform: translateX(108px) rotate(0deg);
   }
 
   @media (max-width: 640px) {

@@ -11,9 +11,9 @@
 
 /* ─── Custom properties ─────────────────────────────────── */
 :root {
-  --content-max-width: 550px;
-  --padding-x: 20px;
-  --padding-y: 40px;
+  --content-max-width: 592px;
+  --padding-x: 22px;
+  --padding-y: 43px;
 
   --color-text: #656565;
   --color-text-secondary: #000000;
@@ -22,7 +22,7 @@
   --color-link: var(--color-text);
   --color-bg: #ffffff;
 
-  --font-size-base: 13px;
+  --font-size-base: 14px;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -85,11 +85,11 @@ a:hover {
 .page-wrapper--detail > .page-content {
   margin-top: 0;
   margin-bottom: 0;
-  padding-bottom: 80px;
+  padding-bottom: 86px;
 }
 
 @media (min-width: 640px) {
   .page-wrapper--detail > .page-content {
-    padding-bottom: 140px;
+    padding-bottom: 151px;
   }
 }
