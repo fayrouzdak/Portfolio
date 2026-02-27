@@ -44,7 +44,7 @@ const showcaseImages = await Promise.all(
 
       <div class="detail__description">
         {project.description.map((paragraph) => (
-          <p>{paragraph}</p>
+          <p set:html={paragraph} />
         ))}
       </div>
     </section>
@@ -149,6 +149,23 @@ const showcaseImages = await Promise.all(
   .detail__description p {
     font-size: 13px;
     color: var(--color-text-secondary);
+  }
+
+  .detail__description :global(a) {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: color 0.15s ease;
+  }
+
+  .detail__description :global(a:visited) {
+    color: var(--color-text);
+  }
+
+  .detail__description :global(a:hover),
+  .detail__description :global(a:active) {
+    color: var(--color-text-secondary);
+    border-bottom-color: #c5c5c5;
   }
 
   /* ─── Showcase ───────────────────────────── */

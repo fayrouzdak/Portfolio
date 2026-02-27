@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import avatarImage from "../assets/avatar.png";
 
 interface Props {
   title?: string;
@@ -33,7 +32,7 @@ const socialImageUrl = new URL("/preview-link.png", Astro.site ?? Astro.url).toS
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
     <title>{title}</title>
-    <link rel="icon" type="image/png" href={avatarImage.src} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     {isDetail && (
       <script is:inline>
         (function () {

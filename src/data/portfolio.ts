@@ -94,8 +94,11 @@ export const portfolio: PortfolioData = {
       isCurrent: false,
       role: "Product designer",
       description: [
-        "Worked across a variety of client projects and agencies, covering branding, product design, and UX across SaaS and marketplace products.",
-        "Gained experience working in different team environments, adapting to varying constraints and delivering polished outcomes.",
+        "This is a collection of selected work from different projects and agency collaborations between 2020 and 2023.",
+        "One of the most defining projects during this time was <a href=\"https://www.connected.app/tools\" target=\"_blank\" rel=\"noopener noreferrer\">connected.app</a>, where I worked on a platform that provides network monitoring and observability tools.",
+        "I think when you depend on an agent to run and watch your project for you, trust becomes the product. I worked closely with the founder to define states, alerts, and dashboards.",
+        "I spent a lot of time on hierarchy, copy, and tone because a huge part of the experience was showing alerts in high stress moments.",
+        "If I was doing my job right, the a user only needs to read one line in a stressful event, yet they still understand the situation and can find their way easily through the flow.",
       ],
       thumbnails: [
         "projects/agencies/agencies-1.png",
