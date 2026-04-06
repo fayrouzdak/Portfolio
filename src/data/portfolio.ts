@@ -2,7 +2,7 @@ import type { PortfolioData } from "./types";
 
 export const portfolio: PortfolioData = {
   name: "fay",
-  bio: "I think good design is sharp, both in how it looks and works. I like to think through experiences and put effort into shipping solutions with taste. I'm currently experienced in cloud software, data heavy developer workflows, saas, and marketplaces.",
+  bio: "I think good design is sharp, both in how it looks and works. I like to think through experiences and put effort into shipping solutions with taste.",
   avatar: "avatar.png",
   socialLinks: [
     { label: "Twitter", url: "https://x.com/faydesignsstuff" },
