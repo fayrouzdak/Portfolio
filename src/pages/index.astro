@@ -3,6 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Bio from "../components/Bio.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { portfolio } from "../data/portfolio";
+
+const playgroundLinks = [
+  { href: "https://ascii.faydakrouri.com/", label: "ASCII" },
+  { href: "https://thegoodinvoice.com/", label: "Good invoice" },
+  { href: "https://snake.faydakrouri.com/", label: "Arcade" },
+] as const;
 ---
 
 <BaseLayout>
@@ -19,6 +25,40 @@ import { portfolio } from "../data/portfolio";
         <ProjectCard project={project} />
       ))}
     </div>
+
+    <section class="playground" aria-label="Playground projects">
+      <span class="bio__name">Playground projects</span>
+      <div class="playground__links">
+        {
+          playgroundLinks.map(({ href, label }) => (
+            <a
+              href={href}
+              class="bio__link playground__link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="playground__label">{label}</span>
+              <svg
+                class="playground__ext-icon"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.08 3.04306C10.5633 3.04306 10.9551 3.43483 10.9551 3.91809L10.955 6.78039C10.955 7.02202 10.7592 7.2179 10.5175 7.21789C10.2759 7.21789 10.0801 7.02204 10.0801 6.78042L10.08 4.53679L3.91788 10.699C3.74703 10.8698 3.47001 10.8698 3.29917 10.699C3.12832 10.5281 3.12832 10.2511 3.29917 10.0802L9.46133 3.91807L7.2177 3.91806C6.97608 3.91806 6.78023 3.72221 6.78023 3.48058C6.78022 3.23896 6.9761 3.04308 7.21773 3.04308L10.08 3.04306Z"
+                  fill="#949494"
+                />
+              </svg>
+            </a>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
@@ -40,5 +80,73 @@ import { portfolio } from "../data/portfolio";
       grid-template-columns: 1fr;
       gap: 9px;
     }
+  }
+
+  .playground {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+    padding: 0;
+    font-size: 14px;
+  }
+
+  .playground__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  @media (max-width: 640px) {
+    .playground {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .playground__links {
+      margin-left: 0;
+      justify-content: flex-start;
+      width: 100%;
+    }
+  }
+
+  .playground .playground__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: none;
+  }
+
+  .playground .playground__link:hover,
+  .playground .playground__link:active {
+    border-bottom: none;
+  }
+
+  .playground .playground__label {
+    border-bottom: 1px dashed transparent;
+  }
+
+  .playground .playground__link:hover .playground__label,
+  .playground .playground__link:active .playground__label,
+  .playground .playground__link:focus-visible .playground__label {
+    border-bottom-color: #c5c5c5;
+  }
+
+  .playground__ext-icon {
+    flex-shrink: 0;
+    display: block;
+    width: 14px;
+    height: 14px;
+    margin-left: 2px;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+
+  .playground .playground__link:hover .playground__ext-icon,
+  .playground .playground__link:focus-visible .playground__ext-icon {
+    opacity: 1;
   }
 </style>
