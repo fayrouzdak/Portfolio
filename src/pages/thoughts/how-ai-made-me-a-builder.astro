@@ -19,17 +19,16 @@ import { article } from "../../data/writing";
       <h1 class="writing__intro-title">{article.title}</h1>
     </section>
 
+    <WritingAsciiGif />
+
     <article class="writing__article" aria-label="Article body">
-      {article.sections.map((section, index) => (
-        <>
-          <section class="writing__section">
-            <h2 class="writing__section-title">{section.heading}</h2>
-            {section.paragraphs.map((paragraph) => (
-              <p set:html={paragraph} />
-            ))}
-          </section>
-          {index === 0 ? <WritingAsciiGif /> : null}
-        </>
+      {article.sections.map((section) => (
+        <section class="writing__section">
+          <h2 class="writing__section-title">{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p set:html={paragraph} />
+          ))}
+        </section>
       ))}
     </article>
   </div>
