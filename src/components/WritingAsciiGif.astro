@@ -85,6 +85,75 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
       }
     }
 
+    /** Full-width drag/tap on touch — value tracks finger X so min/max are reachable; thumb stays visually small. */
+    function bindCoarsePointerRange(el) {
+      if (typeof window.matchMedia === "undefined" || !window.matchMedia("(pointer: coarse)").matches) {
+        return;
+      }
+
+      var activeId = null;
+
+      function setValueFromClientX(clientX) {
+        var r = el.getBoundingClientRect();
+        var w = r.width || 1;
+        var t = (clientX - r.left) / w;
+        if (t < 0) t = 0;
+        else if (t > 1) t = 1;
+        var min = parseFloat(el.getAttribute("min"));
+        var max = parseFloat(el.getAttribute("max"));
+        var step = parseFloat(el.getAttribute("step"));
+        if (!isFinite(min)) min = 0;
+        if (!isFinite(max)) max = 100;
+        var v = min + t * (max - min);
+        if (isFinite(step) && step > 0) {
+          var k = Math.round(v / step);
+          v = k * step;
+          var sd = (String(step).split(".")[1] || "").length;
+          v = parseFloat(v.toFixed(sd));
+        }
+        if (v < min) v = min;
+        if (v > max) v = max;
+        el.value = String(v);
+        el.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      function end(e) {
+        if (activeId === null) return;
+        if (e && e.pointerId !== activeId) return;
+        try {
+          el.releasePointerCapture(activeId);
+        } catch (err) {}
+        activeId = null;
+      }
+
+      el.addEventListener(
+        "pointerdown",
+        function (e) {
+          if (e.pointerType === "mouse") return;
+          activeId = e.pointerId;
+          try {
+            el.setPointerCapture(e.pointerId);
+          } catch (err) {}
+          setValueFromClientX(e.clientX);
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+
+      el.addEventListener(
+        "pointermove",
+        function (e) {
+          if (activeId === null || e.pointerId !== activeId) return;
+          setValueFromClientX(e.clientX);
+          e.preventDefault();
+        },
+        { passive: false }
+      );
+
+      el.addEventListener("pointerup", end);
+      el.addEventListener("pointercancel", end);
+    }
+
     function setup(root) {
       var url = root.getAttribute("data-frames-src");
       if (!url) return;
@@ -149,6 +218,9 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
       }
 
       applyVars(stage, zoomEl, opacityEl, brightnessEl);
+      bindCoarsePointerRange(zoomEl);
+      bindCoarsePointerRange(opacityEl);
+      bindCoarsePointerRange(brightnessEl);
       zoomEl.addEventListener("input", applySizing);
       opacityEl.addEventListener("input", function () {
         applyVars(stage, zoomEl, opacityEl, brightnessEl);
@@ -353,8 +425,13 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     width: 100%;
     height: 16px;
     margin: 0;
+    padding: 0;
+    border: 0;
     background: transparent;
     cursor: pointer;
+    box-sizing: border-box;
+    /* iOS Safari otherwise insets the track and can prevent reaching min/max */
+    touch-action: pan-x;
   }
 
   .writing-ascii__range:focus {
@@ -399,23 +476,22 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     box-shadow: none;
   }
 
-  /* Wider invisible thumb: same 3×10px look, ~44px touch target (pointer: coarse only) */
+  /*
+   * Touch: keep the real thumb 3×10px so min/max reach the track ends (wide thumbs break that).
+   * Taller invisible hit strip: vertical padding + negative margin only (track width unchanged).
+   */
   @media (pointer: coarse) {
-    .writing-ascii__range::-webkit-slider-thumb {
-      width: 44px;
-      height: 10px;
-      margin-top: -4px;
-      background: linear-gradient(#656565, #656565) center / 3px 10px no-repeat;
-      border: none;
+    .writing-ascii__slider-well {
+      overflow: visible;
     }
 
-    .writing-ascii__range::-moz-range-thumb {
-      width: 44px;
-      height: 10px;
-      background: linear-gradient(#656565, #656565) center / 3px 10px no-repeat;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
+    .writing-ascii__range {
+      box-sizing: content-box;
+      padding: 20px 0;
+      margin: -20px 0;
+      width: 100%;
+      max-width: none;
+      touch-action: pan-x;
     }
   }
 
