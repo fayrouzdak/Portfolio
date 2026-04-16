@@ -1,5 +1,5 @@
 export const article = {
-  title: "The shift from design as vision to design as reality",
+  title: "How AI made me a builder",
   sections: [
     {
       heading: "Craft",
