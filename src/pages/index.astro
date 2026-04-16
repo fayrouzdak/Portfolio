@@ -122,15 +122,38 @@ const playgroundLinks = [
   }
 
   @media (max-width: 640px) {
+    .home-extras {
+      gap: 32px;
+    }
+
     .playground {
       flex-direction: column;
       align-items: flex-start;
+      gap: 13px;
     }
 
     .playground__links {
+      flex-direction: column;
+      align-items: flex-start;
       margin-left: 0;
       justify-content: flex-start;
       width: 100%;
+      gap: 13px;
+    }
+
+    .writing-cta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .playground .playground__link {
+      flex-direction: row-reverse;
+    }
+
+    .playground .playground__ext-icon {
+      margin-right: 0;
+      margin-left: 2px;
     }
   }
 
@@ -183,8 +206,13 @@ const playgroundLinks = [
     display: inline-flex;
     align-items: center;
     gap: 0;
-    margin-left: auto;
     border-bottom: none;
+  }
+
+  @media (min-width: 641px) {
+    .writing-cta .writing-cta__link {
+      margin-left: auto;
+    }
   }
 
   .writing-cta .writing-cta__link:hover,
