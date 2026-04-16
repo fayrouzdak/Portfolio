@@ -6,16 +6,19 @@ interface Props {
   description?: string;
   /** When true, applies the extra bottom padding for detail pages */
   isDetail?: boolean;
+  /** Path from site root for Open Graph / Twitter preview image, e.g. "/preview-article.png" */
+  ogImage?: string;
 }
 
 const {
   title = "Fay | Product designer",
   description = "Designing structured, scalable, and tasteful experiences",
   isDetail = false,
+  ogImage = "/preview-link.png",
 } = Astro.props;
 const socialImageUrl = Astro.site
-  ? new URL("/preview-link.png", Astro.site).toString()
-  : "/preview-link.png";
+  ? new URL(ogImage, Astro.site).toString()
+  : ogImage;
 ---
 
 <!doctype html>
