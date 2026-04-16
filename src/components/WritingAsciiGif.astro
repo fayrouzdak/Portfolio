@@ -483,22 +483,24 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     box-shadow: none;
   }
 
-  /*
-   * Touch: keep the real thumb 3×10px so min/max reach the track ends (wide thumbs break that).
-   * Taller invisible hit strip: vertical padding + negative margin only (track width unchanged).
-   */
-  @media (pointer: coarse) {
-    .writing-ascii__slider-well {
-      overflow: visible;
+  /* Narrow screens: 2× thumb width for easier grabs; track inset = half thumb (aligns bar with travel). */
+  @media (max-width: 639px) {
+    .writing-ascii__range::-webkit-slider-runnable-track {
+      margin: 0 3px;
     }
 
-    .writing-ascii__range {
-      box-sizing: content-box;
-      padding: 20px 0;
-      margin: -20px 0;
-      width: 100%;
-      max-width: none;
-      touch-action: pan-x;
+    .writing-ascii__range::-webkit-slider-thumb {
+      width: 6px;
+      margin-top: -4px;
+    }
+
+    .writing-ascii__range::-moz-range-track,
+    .writing-ascii__range::-moz-range-progress {
+      margin: 0 3px;
+    }
+
+    .writing-ascii__range::-moz-range-thumb {
+      width: 6px;
     }
   }
 
