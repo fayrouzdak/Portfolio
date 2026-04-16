@@ -1,0 +1,437 @@
+---
+/** Gzip JSON: `[{ "h": innerHTML, "d": delayMs }, ...]` exported from ascii-art HTML */
+const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="writing-ascii" data-frames-src={FRAMES_SRC}>
+  <div class="writing-ascii__viewport">
+    <div class="writing-ascii__stage">
+      <pre class="writing-ascii__out" aria-label="ASCII art tunnel animation"></pre>
+    </div>
+  </div>
+  <div class="writing-ascii__controls" role="group" aria-label="ASCII preview settings">
+    <div class="writing-ascii__control">
+      <span class="writing-ascii__caption">Zoom</span>
+      <span class="writing-ascii__slider-well">
+        <input
+          class="writing-ascii__range"
+          type="range"
+          min="1"
+          max="1.85"
+          step="0.01"
+          value="1"
+          aria-label="Zoom"
+          data-zoom
+        />
+      </span>
+    </div>
+    <div class="writing-ascii__control">
+      <span class="writing-ascii__caption">Opacity</span>
+      <span class="writing-ascii__slider-well">
+        <input
+          class="writing-ascii__range"
+          type="range"
+          min="0.2"
+          max="1"
+          step="0.01"
+          value="1"
+          aria-label="Opacity"
+          data-opacity
+        />
+      </span>
+    </div>
+    <div class="writing-ascii__control">
+      <span class="writing-ascii__caption">Brightness</span>
+      <span class="writing-ascii__slider-well">
+        <input
+          class="writing-ascii__range"
+          type="range"
+          min="0.35"
+          max="2.75"
+          step="0.01"
+          value="1.55"
+          aria-label="Brightness"
+          data-brightness
+        />
+      </span>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ framesSrc: FRAMES_SRC }}>
+  (function () {
+    var BASE_FONT_PX = 14;
+
+    function brightnessRangeMid(el) {
+      var mn = parseFloat(el.min);
+      var mx = parseFloat(el.max);
+      return isFinite(mn) && isFinite(mx) ? (mn + mx) / 2 : 1.55;
+    }
+
+    function applyVars(stage, zoomEl, opacityEl, brightnessEl) {
+      var o = parseFloat(opacityEl.value);
+      var b = parseFloat(brightnessEl.value);
+      var bMid = brightnessRangeMid(brightnessEl);
+      if (stage) {
+        stage.style.setProperty("--ascii-opacity", String(isFinite(o) ? o : 1));
+        stage.style.setProperty("--ascii-brightness", String(isFinite(b) ? b : bMid));
+      }
+    }
+
+    function setup(root) {
+      var url = root.getAttribute("data-frames-src");
+      if (!url) return;
+
+      var zoomEl = root.querySelector("[data-zoom]");
+      var opacityEl = root.querySelector("[data-opacity]");
+      var brightnessEl = root.querySelector("[data-brightness]");
+      var viewport = root.querySelector(".writing-ascii__viewport");
+      var stage = root.querySelector(".writing-ascii__stage");
+      var outEl = root.querySelector(".writing-ascii__out");
+      if (!zoomEl || !opacityEl || !brightnessEl || !viewport || !stage || !outEl) return;
+
+      brightnessEl.value = String(brightnessRangeMid(brightnessEl));
+
+      var fontsSettled =
+        document.fonts && document.fonts.ready
+          ? document.fonts.ready
+          : Promise.resolve();
+
+      /** scrollWidth of `out` at BASE_FONT_PX — remeasured when frame HTML changes. */
+      var contentWAtBase = 0;
+
+      outEl.style.fontSize = BASE_FONT_PX + "px";
+      stage.style.transformOrigin = "center center";
+
+      function measureContentWidth() {
+        void outEl.offsetWidth;
+        contentWAtBase = outEl.scrollWidth;
+      }
+
+      function contentMaxWidthPx() {
+        var fallback = 592;
+        try {
+          var raw = getComputedStyle(document.documentElement)
+            .getPropertyValue("--content-max-width")
+            .trim();
+          var p = parseFloat(raw);
+          if (isFinite(p) && p > 0) return p;
+        } catch (e) {}
+        return fallback;
+      }
+
+      function applySizing() {
+        var cw = viewport.clientWidth || 1;
+        var z = parseFloat(zoomEl.value);
+        z = isFinite(z) ? z : 1;
+        if (z < 1) z = 1;
+        var targetW = Math.min(cw, contentMaxWidthPx());
+        var scale = (targetW / Math.max(contentWAtBase, 1)) * z;
+        stage.style.transform = "scale(" + scale + ")";
+      }
+
+      function measureAndSize() {
+        measureContentWidth();
+        applySizing();
+      }
+
+      function afterLayout(fn) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(fn);
+        });
+      }
+
+      applyVars(stage, zoomEl, opacityEl, brightnessEl);
+      zoomEl.addEventListener("input", applySizing);
+      opacityEl.addEventListener("input", function () {
+        applyVars(stage, zoomEl, opacityEl, brightnessEl);
+      });
+      brightnessEl.addEventListener("input", function () {
+        applyVars(stage, zoomEl, opacityEl, brightnessEl);
+      });
+
+      if (typeof ResizeObserver !== "undefined") {
+        var ro = new ResizeObserver(function () {
+          applySizing();
+        });
+        ro.observe(viewport);
+      } else {
+        window.addEventListener("resize", applySizing);
+      }
+
+      fontsSettled.then(function () {
+        if (outEl.textContent || outEl.innerHTML) {
+          afterLayout(measureAndSize);
+        }
+      });
+
+      var reduceMotion =
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      var F = null;
+      var i = 0;
+      var timer = null;
+      var stopped = false;
+
+      function step() {
+        if (stopped || !F || !F.length) return;
+        var fr = F[i];
+        outEl.innerHTML = fr.h;
+        afterLayout(function () {
+          fontsSettled.then(measureAndSize);
+        });
+        var d = reduceMotion ? 0 : fr.d;
+        i = (i + 1) % F.length;
+        if (reduceMotion) return;
+        timer = setTimeout(step, typeof d === "number" && d > 0 ? d : 30);
+      }
+
+      function fail(err) {
+        outEl.textContent =
+          "Could not load ASCII frames. Try a hard refresh or another browser.";
+        if (typeof console !== "undefined" && console.warn) {
+          console.warn("[writing-ascii]", err);
+        }
+      }
+
+      function parseFramesBuffer(buf) {
+        var text = new TextDecoder("utf-8").decode(buf);
+        return JSON.parse(text);
+      }
+
+      function gunzipBuffer(buf) {
+        if (typeof DecompressionStream === "undefined") {
+          return Promise.reject(new Error("no DecompressionStream"));
+        }
+        var ds = new DecompressionStream("gzip");
+        return new Response(new Blob([buf]).stream().pipeThrough(ds)).arrayBuffer();
+      }
+
+      /** Some hosts send Content-Encoding: gzip so fetch already inflates the body — avoid double-decode. */
+      function decodeFramesBytes(buf) {
+        try {
+          var Ftry = parseFramesBuffer(buf);
+          if (Array.isArray(Ftry) && Ftry.length && Ftry[0] && typeof Ftry[0].h === "string") {
+            return Promise.resolve(Ftry);
+          }
+        } catch (e) {}
+        return gunzipBuffer(buf).then(function (inflated) {
+          var F2 = parseFramesBuffer(inflated);
+          if (!Array.isArray(F2) || !F2.length) throw new Error("bad frames");
+          return F2;
+        });
+      }
+
+      var reqUrl = url;
+      try {
+        reqUrl = new URL(url, window.location.href).toString();
+      } catch (e) {}
+
+      fetch(reqUrl)
+        .then(function (r) {
+          if (!r.ok) throw new Error("frames " + r.status);
+          return r.arrayBuffer();
+        })
+        .then(decodeFramesBytes)
+        .then(function (parsed) {
+          F = parsed;
+          if (!Array.isArray(F) || !F.length) throw new Error("bad frames");
+          step();
+        })
+        .catch(fail);
+
+      window.addEventListener(
+        "beforeunload",
+        function () {
+          stopped = true;
+          if (timer) clearTimeout(timer);
+        },
+        { once: true }
+      );
+    }
+
+    function boot() {
+      document.querySelectorAll(".writing-ascii[data-frames-src]").forEach(setup);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", boot);
+    } else {
+      boot();
+    }
+  })();
+</script>
+
+<style>
+  .writing-ascii {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
+    background: unset;
+  }
+
+  .writing-ascii__controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 639px) {
+    .writing-ascii__controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .writing-ascii__control {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .writing-ascii__slider-well {
+      flex: 1 1 auto;
+      width: auto;
+      min-width: 80px;
+      max-width: none;
+    }
+  }
+
+  .writing-ascii__control {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .writing-ascii__caption {
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #656565;
+  }
+
+  .writing-ascii__slider-well {
+    flex: 0 0 100px;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    box-sizing: border-box;
+    background: #fafafa;
+    isolation: isolate;
+    border-radius: 0;
+  }
+
+  .writing-ascii__range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 16px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .writing-ascii__range:focus {
+    outline: none;
+  }
+
+  .writing-ascii__range:focus-visible {
+    outline: 2px solid #656565;
+    outline-offset: 2px;
+    border-radius: 0;
+  }
+
+  .writing-ascii__range::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #cdcdcd;
+    border-radius: 0;
+  }
+
+  .writing-ascii__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 3px;
+    height: 10px;
+    margin-top: -4px;
+    background: #656565;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .writing-ascii__range::-moz-range-track {
+    height: 2px;
+    background: #cdcdcd;
+    border-radius: 0;
+  }
+
+  .writing-ascii__range::-moz-range-thumb {
+    width: 3px;
+    height: 10px;
+    border: none;
+    border-radius: 0;
+    background: #656565;
+    box-shadow: none;
+  }
+
+  .writing-ascii__viewport {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    overscroll-behavior: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: min(52vh, 226px);
+    padding: 0;
+    color: rgba(105, 105, 105, 1);
+    background-color: rgba(250, 250, 250, 1);
+    border: none;
+    border-radius: 0;
+  }
+
+  .writing-ascii__stage {
+    flex: 0 0 auto;
+    opacity: var(--ascii-opacity, 1);
+    filter: brightness(var(--ascii-brightness, 1.55));
+  }
+
+  .writing-ascii__out {
+    margin: 0;
+    font-family: "VT323", ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.15;
+    letter-spacing: 0;
+    color: #a8a9b0;
+    white-space: pre;
+    background: transparent;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import WritingAsciiGif from "../components/WritingAsciiGif.astro";
 import { article } from "../data/writing";
 ---
 
@@ -18,6 +19,8 @@ import { article } from "../data/writing";
       <h1 class="writing__intro-title">{article.title}</h1>
     </section>
 
+    <WritingAsciiGif />
+
     <article class="writing__article" aria-label="Article body">
       {article.sections.map((section) => (
         <section class="writing__section">
@@ -35,6 +38,8 @@ import { article } from "../data/writing";
   .writing {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-width: 0;
   }
 
   .writing__header {
