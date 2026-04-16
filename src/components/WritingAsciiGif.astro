@@ -277,7 +277,7 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     margin-bottom: 28px;
     min-width: 0;
     width: 100%;
-    overflow: hidden;
+    /* Clipping lives on .writing-ascii__viewport so range thumbs can extend for touch without being cut off */
     background: unset;
   }
 
@@ -397,6 +397,26 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     border-radius: 0;
     background: #656565;
     box-shadow: none;
+  }
+
+  /* Wider invisible thumb: same 3×10px look, ~44px touch target (pointer: coarse only) */
+  @media (pointer: coarse) {
+    .writing-ascii__range::-webkit-slider-thumb {
+      width: 44px;
+      height: 10px;
+      margin-top: -4px;
+      background: linear-gradient(#656565, #656565) center / 3px 10px no-repeat;
+      border: none;
+    }
+
+    .writing-ascii__range::-moz-range-thumb {
+      width: 44px;
+      height: 10px;
+      background: linear-gradient(#656565, #656565) center / 3px 10px no-repeat;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
   }
 
   .writing-ascii__viewport {
