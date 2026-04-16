@@ -375,13 +375,11 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     .writing-ascii__control {
       width: 100%;
       justify-content: space-between;
+      min-width: 0;
     }
 
-    .writing-ascii__slider-well {
-      flex: 1 1 auto;
-      width: auto;
-      min-width: 80px;
-      max-width: none;
+    .writing-ascii__caption {
+      flex-shrink: 0;
     }
   }
 
@@ -485,6 +483,14 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
 
   /* Narrow screens: 2× thumb width for easier grabs; track inset = half thumb (aligns bar with travel). */
   @media (max-width: 639px) {
+    /* Up to 2× desktop width; shrinks when the row is narrow (fixed 200px overflowed small viewports). */
+    .writing-ascii__slider-well {
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      max-width: 200px;
+    }
+
     .writing-ascii__range::-webkit-slider-runnable-track {
       margin: 0 3px;
     }
