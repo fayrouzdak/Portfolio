@@ -444,10 +444,15 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     border-radius: 0;
   }
 
+  /*
+   * Thumb centers on the value, so it only travels between 1.5px and width−1.5px (3px thumb).
+   * Inset the track by the same amount so the bar’s ends line up with the thumb at min/max.
+   */
   .writing-ascii__range::-webkit-slider-runnable-track {
     height: 2px;
     background: #cdcdcd;
     border-radius: 0;
+    margin: 0 1.5px;
   }
 
   .writing-ascii__range::-webkit-slider-thumb {
@@ -461,10 +466,12 @@ const FRAMES_SRC = "/writing-tunnel-frames.json.gz";
     box-shadow: none;
   }
 
-  .writing-ascii__range::-moz-range-track {
+  .writing-ascii__range::-moz-range-track,
+  .writing-ascii__range::-moz-range-progress {
     height: 2px;
     background: #cdcdcd;
     border-radius: 0;
+    margin: 0 1.5px;
   }
 
   .writing-ascii__range::-moz-range-thumb {
