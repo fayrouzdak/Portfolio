@@ -8,6 +8,11 @@ interface Props {
   isDetail?: boolean;
   /** Path from site root for Open Graph / Twitter preview image, e.g. "/preview-article.png" */
   ogImage?: string;
+  /**
+   * Bump when replacing the preview image so Twitter/X fetches a new URL
+   * (they cache og:image aggressively when the URL is unchanged).
+   */
+  ogImageCacheBust?: string;
 }
 
 const {
@@ -15,10 +20,16 @@ const {
   description = "Designing structured, scalable, and tasteful experiences",
   isDetail = false,
   ogImage = "/preview-link.png",
+  ogImageCacheBust,
 } = Astro.props;
-const socialImageUrl = Astro.site
+
+const ogImageAbsolute = Astro.site
   ? new URL(ogImage, Astro.site).toString()
   : ogImage;
+const socialImageUrl =
+  ogImageCacheBust && ogImageCacheBust.length > 0
+    ? `${ogImageAbsolute}${ogImageAbsolute.includes("?") ? "&" : "?"}v=${encodeURIComponent(ogImageCacheBust)}`
+    : ogImageAbsolute;
 ---
 
 <!doctype html>

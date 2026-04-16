@@ -1,5 +1,7 @@
 export const article = {
   title: "How AI made me a builder",
+  /** Increment when `preview-link-how-ai-made-me-a-builder.png` changes (social caches by URL). */
+  socialPreviewVersion: "2",
   sections: [
     {
       heading: "Craft",
